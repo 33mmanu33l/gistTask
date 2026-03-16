@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Task Management System Demo</title>
+<style>
+body{font-family:Arial;margin:40px}
+table{border-collapse:collapse;width:100%}
+th,td{border:1px solid #ccc;padding:8px;text-align:left}
+th{font-weight:bold}
+h1{margin-bottom:5px}
+</style>
+</head>
+<body>
+
+<h1>Project Task Management System</h1>
+<p>Demo project showing a simple task tracking system similar to a SharePoint task list.</p>
+
+<table id="taskTable">
+<thead>
+<tr>
+<th>Task ID</th>
+<th>Task Name</th>
+<th>Assigned To</th>
+<th>Priority</th>
+<th>Status</th>
+<th>Due Date</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<script>
+fetch('tasks.json')
+.then(res => res.json())
+.then(data => {
+const tbody = document.querySelector("#taskTable tbody");
+data.forEach(t => {
+const row = document.createElement("tr");
+row.innerHTML = `
+<td>${t["Task ID"]}</td>
+<td>${t["Task Name"]}</td>
+<td>${t["Assigned To"]}</td>
+<td>${t["Priority"]}</td>
+<td>${t["Status"]}</td>
+<td>${t["Due Date"]}</td>
+`;
+tbody.appendChild(row);
+});
+});
+</script>
+
+</body>
+</html>
